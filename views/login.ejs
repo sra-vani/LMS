@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="<%= csrfToken %>">
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Login</title>
+</head>
+
+<body class="text-center">
+    <%- include('header.ejs') %>
+    <h1>Sign In</h1>
+
+    <form class="" action="/session" method="post">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <div class="py-4">
+            <label for="email">Email Address: </label>
+            <input type="email" class="border" id="email" name="email" required>
+        </div>
+        <div class="py-4">
+            <label for="password">Password: </label>
+            <input type="password" class="border" id="password" name="password" required>
+        </div>
+        <div class="py-4">
+            <button type="submit" class="bg-green-500 rounded">Sign In</button>
+        </div>
+    </form>
+    <p>New User <a class="bg-green-500 rounded" href="/signup">Sign Up</a></p>
+
+    <%- include('notifications.ejs') %>
+    <%- include('footer.ejs') %>
+</body>
+
+</html>

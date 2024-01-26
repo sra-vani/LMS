@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter Pages</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="text-center">
+    <br>
+    <a href="/signout" class="bg-green-400">Sign Out</a>
+    <a href="/dashboard" class="bg-green-400">Home</a>
+    <a href="/mycourses" class="bg-green-400">My Courses</a>
+    <hr class="mt-4">
+    <h1 class="font-bold text-2xl">Page List</h1>
+    <hr>
+    <%- include('notifications') %>
+    <table class="mx-auto">
+        <tr>
+            <th>
+                Page Number
+            </th>
+            <th>
+                Page Title
+            </th>
+        </tr>
+        <% for(var i=0; i < pages.length ;i++){ %> 
+            <tr onclick="window.open('/pages/<%= pages[i].id %>?courseId=<%= courseId %>', '_blank');"
+                style="cursor: pointer;">
+                <td>
+                    <%= pages[i].id %>
+                </td>
+                <td>
+                    <%= pages[i].title %>
+                </td>
+            </tr>
+        <% } %>
+    </table>
+    <p class="mt-2"><a href="javascript:void(0);" onclick="window.close();" class="bg-green-400">Close Tab</a></p>
+</body>
+
+</html>

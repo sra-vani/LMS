@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter Pages</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="text-center">
+    <%- include('header.ejs') %>
+    <a href="/signout" class="bg-green-400">Sign Out</a>
+    <a href="/dashboard" class="bg-green-400">Home</a>
+    <h1 class="font-semibold">Manage Pages</h1>
+    <hr class="mt-2 mb-2">
+    <form action="/addPage" method="post" class="text-center">
+        <input class="border-2 ml-2" type="text" placeholder="Page Title" name="title" required>
+        <textarea class="border-2 mx-auto block w-3/4 mt-2 mb-2" rows="10" name="content"
+            placeholder="Enter Page Content" required></textarea>
+        <button class="bg-green-400 ml-2" type="submit">Add</button>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="hidden" name="chapterId" value="<%= chapterId %>">
+    </form>
+    <%- include('notifications') %>
+    <hr class="mt-2">
+    <table class="mx-auto">
+        <tr>
+            <th>
+                PAGE NUMBER
+            </th>
+            <th>
+                Page Title
+            </th>
+        </tr>
+        <% for(var i=0; i < pages.length ;i++){ %>
+            <tr>
+                <td>
+                    <%= pages[i].id %>
+                </td>
+                <td class="group flex items-center">
+                    <%= pages[i].title %>
+                </td>
+            </tr>
+        <% } %>
+    </table>
+    <p class="mt-2"><a href="javascript:void(0);" onclick="window.close();" class="bg-green-400">Close Tab</a></p>
+</body>
+
+</html>

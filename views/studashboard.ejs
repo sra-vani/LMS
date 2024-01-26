@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="text-center"> 
+    <%- include('header.ejs') %>
+    <a href="/signout" class="bg-green-400">Sign Out</a>
+    <a href="/changepassword" class="bg-green-400">Change Password</a>
+    <a href="/mycourses" class="bg-green-400">My Courses</a>
+    <h1 class="text-xl font-bold mt-2">Welcome, <%= userDetail %></h1>
+    <hr>
+    <h3>Explore the Available Courses...</h3>
+    <p>Click on any course below to view details...</p>
+    <%- include('notifications') %>
+    <table class="mx-auto">
+        <tr>
+            <th>
+                Course Number
+            </th>
+            <th>
+                Course Name
+            </th>
+        </tr>
+        <% for(var i=0; i < courses.length ;i++){ %>
+            <tr onclick="window.open('/courses/<%= courses[i].id %>', '_blank');" style="cursor: pointer;">
+                <td>
+                  <%= courses[i].id %>
+                </td>
+                <td>
+                  <%= courses[i].name %>
+                </td>
+              </tr>           
+        <% } %>
+    </table>
+</body>
+
+</html>

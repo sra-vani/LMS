@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Chapters</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="text-center">
+    <%- include('header.ejs') %>
+    <a href="/signout" class="bg-green-400">Sign Out</a>
+    <a href="/dashboard" class="bg-green-400">Home</a>
+    <hr class="m-2">
+    <h1 class="font-semibold">Create New Chapter</h1>
+    <form action="/addChapter" method="post">
+        <input class="border-2 ml-2" type="text" placeholder="Chapter Name" name="name" required>
+        <input class="border-2 ml-2" type="text" placeholder="Description" name="description" required> 
+        <button class="bg-green-400 ml-2" type="submit">Add</button>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="hidden" name="courseId" value="<%= courseId %>">
+    </form>
+    <hr class="mt-2"> 
+    <%- include('notifications') %>
+    <p>Click on the chapters below to add pages...</p>
+    <table class="mx-auto">
+        <tr>
+            <th>
+                Chapter Number
+            </th>
+            <th>
+                Chapter Name
+            </th>
+        </tr>
+        <% for(var i=0; i < chapters.length ;i++){ %>
+            <tr onclick="window.open('/chapter/<%= chapters[i].id %>', '_blank');" style="cursor: pointer;">
+                <td>
+                  <%= chapters[i].id %>
+                </td>
+                <td class="group flex items-center">
+                  <%= chapters[i].name %>
+                </td>
+              </tr>
+        <% } %>
+    </table>
+    <p class="mt-2"><a href="javascript:void(0);" onclick="window.close();" class="bg-green-400">Close Tab</a></p>
+</body>
+</html>

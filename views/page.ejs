@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="text-center">
+    <br>
+    <a href="/signout" class="bg-green-400">Sign Out</a>
+    <a href="/dashboard" class="bg-green-400">Home</a>
+    <a href="/mycourses" class="bg-green-400">My Courses</a>
+    <hr class="mb-1 mt-3">
+    <h1 class="font-semibold text-xl"><%= page.title %></h1>
+    <hr class="mb-1 mt-1">
+    <p class="mb-2"><%= page.content %></p>
+    <%- include('notifications') %>
+    <% if(!isComplete) { %>
+        <form action="/markAsComplete/<%= page.id %>" method="post">
+            <input type="hidden" name="courseId" value="<%= courseId %>">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="bg-green-400">Mark As Complete</button>
+        </form>
+    <% } else { %>
+        <p class="mb-2">Marked Complete</p>
+    <% } %>
+    <p class="mt-2"><a href="javascript:void(0);" onclick="window.close();" class="bg-green-400">Close Tab</a></p>
+</body>
+
+</html>
